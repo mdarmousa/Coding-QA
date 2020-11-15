@@ -1,0 +1,30 @@
+// https://leetcode.com/problems/last-stone-weight/submissions/
+
+
+public class Solution {
+    public int LastStoneWeight(int[] stones) {
+        var stonesList = stones.OfType<int>().ToList();
+        stonesList.Sort((x,y) => y-x);
+              
+
+        while(stonesList.Count != 1){
+            int newinput = stonesList[0] -  stonesList[1];
+            stonesList.RemoveAt(0);
+            stonesList.RemoveAt(0);
+
+            
+            if(stonesList.Count == 0) 
+                return newinput;
+            if (newinput != 0){            
+               
+                int idx=0;
+                while(idx < stonesList.Count && newinput < stonesList[idx]) idx++;
+                if (idx == stonesList.Count) stonesList.Add(newinput);
+                else stonesList.Insert(idx, newinput);
+            }
+            
+        }
+        
+        return stonesList[0];
+    }
+}
