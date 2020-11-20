@@ -1,0 +1,41 @@
+// https://leetcode.com/problems/minimum-domino-rotations-for-equal-row/
+class Solution {
+    public int minDominoRotations(int[] A, int[] B) {
+        int[] posp = new int[7]; 
+       
+      for(int i = 0; i < A.length; i++){
+            if(A[i] == B[i]){
+                posp[A[i]]++;
+            }else{
+                posp[A[i]]++;
+                posp[B[i]]++;
+            }
+        }
+        
+        boolean isExisit = false;
+        int num = 0;
+        for(int i =1; i< posp.length;i++ ){
+            if(posp[i] >= A.length){
+               isExisit = true;
+               num = i;
+            }
+        }       
+
+        if(!isExisit) return -1;
+        
+        int aCounter=0;
+        int bCounter=0;
+        
+        for(int i = 0; i < A.length; i++)
+        {
+            if(A[i] != B[i])
+            {
+                 if(A[i] == num) aCounter++;
+                 if(B[i] == num) bCounter++;
+            }
+        }
+        
+        
+        return Math.min(aCounter, bCounter);
+    }
+}
