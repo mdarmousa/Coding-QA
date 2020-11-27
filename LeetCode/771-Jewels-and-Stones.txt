@@ -1,0 +1,24 @@
+// https://leetcode.com/problems/jewels-and-stones/submissions/
+
+public class Solution {
+    public int NumJewelsInStones(string J, string S) {
+        var jMap = new HashSet<char>();
+        
+        var jArray = J.ToCharArray();
+        
+        foreach(var c in jArray){
+            if(jMap.Contains(c)) continue;
+            jMap.Add(c);
+        }
+        
+        
+        var SArray = S.ToCharArray();
+        int sum=0;
+        foreach(var c in SArray){
+            if(jMap.Contains(c)) sum++;
+        }
+    
+        return sum;
+        
+    }
+}
