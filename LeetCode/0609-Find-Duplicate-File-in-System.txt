@@ -1,0 +1,31 @@
+public class Solution {
+    public IList<IList<string>> FindDuplicate(string[] paths) {
+       var dir = new Dictionary<string, IList<string>>();
+        
+        foreach(var item in paths){
+            var input = item.Split(" ");
+            
+            for (int i =1; i < input.Length; i ++){
+                var nameCount = input[i].Split("(");
+                nameCount[1] = nameCount[1].Replace(")","");
+                dir.TryGetValue(nameCount[1], out var list);
+                list = list ?? new List<string>();
+                
+                list.Add($"{input[0]}/{nameCount[0]}");
+                
+                dir[nameCount[1]] = list;
+                
+            }
+            
+        }
+        
+        
+        var output = new List<IList<string>>();
+        
+        foreach(var item in dir){
+            output.Add(item.Value);
+        }
+        return output;
+        
+    }
+}
