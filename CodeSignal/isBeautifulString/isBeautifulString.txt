@@ -1,0 +1,14 @@
+bool isBeautifulString(string inputString) {
+    var chars = new int[26];
+    foreach(var c in inputString){
+        var b = c-97;
+        chars[b] = chars[b] +1;
+    }
+    
+    for(int i =0; i < chars.Length -1 ; i++){
+        if(chars[i] < chars[i +1])
+            return false;
+    }
+    
+    return true;
+}
