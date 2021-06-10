@@ -1,0 +1,22 @@
+int countPairsWithDifference(int k, int[] a) {
+    var dict = new Dictionary<int, int>();
+    
+    foreach(var num in a){
+        if(dict.TryGetValue(num, out int value)){
+            dict[num] = value +1;
+        }else{
+            dict.Add(num, 1);
+        }
+    }
+    long count = 0;
+    foreach(var num in a ){
+        if(dict.TryGetValue(num + k, out int value))
+        {
+            count += value;
+        }
+    }
+    
+    return (int)(count % (Math.Pow(10, 9) + 7)) ;
+    
+    
+}
